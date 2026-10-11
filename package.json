@@ -1,0 +1,8 @@
+{
+  "name": "fractalx-studio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FractalX — Estudio creativo digital",
+  "scripts": { "dev": "node server.mjs", "check": "node --check dist/app.js" },
+  "type": "module"
+}
