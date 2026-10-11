@@ -7,6 +7,26 @@ const projects = {
 };
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+// Both halves must cover the viewport so the loop never exposes an empty end.
+const marquee = $('.marquee');
+const marqueeGroups = $$('.marquee-group', marquee);
+const marqueeSequence = [...marqueeGroups[0].children].map(node => node.cloneNode(true));
+function fillMarquee() {
+  const firstGroup = marqueeGroups[0];
+  const cloneSequence = () => marqueeSequence.map(node => node.cloneNode(true));
+  firstGroup.replaceChildren(...cloneSequence());
+  const sequenceWidth = firstGroup.getBoundingClientRect().width;
+  if (!sequenceWidth) return;
+  const repeats = Math.max(2, Math.ceil($('.marquee-band').clientWidth / sequenceWidth) + 1);
+  for (let repeat = 1; repeat < repeats; repeat++) firstGroup.append(...cloneSequence());
+  marqueeGroups[1].replaceChildren(...[...firstGroup.children].map(node => node.cloneNode(true)));
+  marquee.style.animationDuration = `${firstGroup.getBoundingClientRect().width / 40}s`;
+}
+fillMarquee();
+if ('ResizeObserver' in window) new ResizeObserver(fillMarquee).observe($('.marquee-band'));
+else window.addEventListener('resize', fillMarquee);
+document.fonts?.ready.then(fillMarquee);
+document.fonts?.addEventListener('loadingdone', fillMarquee);
 let returnFocus;
 function openDialog(dialog) {
   returnFocus = document.activeElement;
