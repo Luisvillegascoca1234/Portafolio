@@ -8,6 +8,8 @@ Desde este directorio, ejecuta `npm run dev` y abre http://127.0.0.1:4173.
 
 El contenido servido se encuentra en `dist/`. El logotipo original está en `dist/assets/fractalx-logo.png`, sin modificaciones. Las fotografías de referencia proceden de Unsplash.
 
+La navegación usa un acabado liquid glass definido en `dist/glass-nav.css`. El logo que se muestra es `dist/assets/fractalx-logo-transparent.svg`: contiene la imagen original y convierte el negro en transparencia mediante un filtro SVG, conservando la forma de las letras y sus colores. El PNG original permanece intacto.
+
 ## Contacto y contenido
 
 El correo de contacto es `fractal@gmail.com`. El formulario prepara un borrador mediante `mailto:` y permite descargar una consulta; no envía correos automáticamente. La guía de brief se descarga localmente, sin suscripción ni almacenamiento de los datos del visitante.
